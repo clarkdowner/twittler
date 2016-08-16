@@ -1,27 +1,82 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <title>Twittler</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
+    
+    
+    <header>Clark's Twittler</header>
+
+    <button>Load Twittles</button>
+
+    <main class="tweet-container">tweet container</main>
+    
+    <!-- 
+    // Example html after loading tweets:
+      
+      <div class="single-tweet">
+        <span class="username">@sharksforcheap</span>
+        ": a tweet is here #cool"
+      </div>
+    -->
+
+    <footer>A HackReactor Project</footer>
+
     <script>
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+      $(document).ready(function(){       
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+    //  Button click to load new tweets 
+        $('button').on('click', function() {
+          var $body = $('main');
+          $body.html('');
+          $('button').text('Load New Twittles');
+
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div class="single-tweet">' + '<button class="username">' +
+              '@' + tweet.user + '</button>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+        });
+
+    //  Hover over username
+    /*    $('main').on('mouseenter', 'span', function() {
+          $(this).slideToggle('.username');
+        });
+    */
+
+    
+    //  Cick to see only a user's tweets
+    //  NEED TO UPDATE SO THIS HAPPENS WHEN CLICKING A USERNAME
+       $('button').on('click', '.username', function() {
+          var $body = $('main');
+          $body.html('single user tweets');
+          $('button').text('Back to Home');
+
+          var index = streams.users.mracus.length - 1;
+          while(index >= 0){
+            var tweet = streams.users.mracus[index];
+            var $tweet = $('<div class="single-tweet">' + '<span class="username">' +
+              '@' + tweet.user + '</span>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+        }); 
+
 
       });
 
-    </script>
+    </script> 
+    
+
+
   </body>
 </html>
