@@ -15,16 +15,7 @@
     <button>Load Twittles</button>
 
     <main class="tweet-container">tweet container</main>
-    
-    <!-- 
-    // Example html after loading tweets:
-      
-      <div class="single-tweet">
-        <span class="username">@sharksforcheap</span>
-        ": a tweet is here #cool"
-      </div>
-    -->
-
+  
     <footer>A HackReactor Project</footer>
 
     <script>
@@ -32,47 +23,47 @@
       $(document).ready(function(){       
 
     //  Button click to load new tweets 
-        $('button').on('click', function() {
-          var $body = $('main');
-          $body.html('');
-          $('button').text('Load New Twittles');
+        $('.bigButton').on('click', function() {
+          $('main').html('');
+          $('.bigButton').text('Load New Twittles');
 
           var index = streams.home.length - 1;
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $('<div class="single-tweet">' + '<button class="username">' +
+            var $tweet = $('<div class="single-tweet">' + '<button class="username' + tweet.user + '">' +
               '@' + tweet.user + '</button>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
-            $tweet.appendTo($body);
+            $tweet.appendTo('main');
             index -= 1;
           }
-        });
+        }); 
 
-    //  Hover over username
-    /*    $('main').on('mouseenter', 'span', function() {
-          $(this).slideToggle('.username');
-        });
-    */
-
-    
-    //  Cick to see only a user's tweets
-    //  NEED TO UPDATE SO THIS HAPPENS WHEN CLICKING A USERNAME
-       $('button').on('click', '.username', function() {
-          var $body = $('main');
-          $body.html('single user tweets');
-          $('button').text('Back to Home');
-
-          var index = streams.users.mracus.length - 1;
+      /*  var index = streams.users.mracus.length - 1;
           while(index >= 0){
             var tweet = streams.users.mracus[index];
             var $tweet = $('<div class="single-tweet">' + '<span class="username">' +
               '@' + tweet.user + '</span>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
             $tweet.appendTo($body);
             index -= 1;
-          }
+          } 
+        }); */
+
+    
+    //  Cick to see only a user's tweets
+       $('main').on('click', '.username', function() {
+          $('main').html('');
+          $(this).closest('.bigButton').text('Back to Home');
+
+          var index = streams.users.mracus.length - 1;
+          while(index >= 0){
+            var tweet = streams.users.mracus[index];
+            var $tweet = $('<div class="single-tweet">' + '<span class="username">' +
+              '@' + tweet.user + '</span>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
+            $tweet.appendTo('main');
+            index -= 1;
+          } 
         }); 
 
-
-      });
+      }); // << closes the document.ready function
 
     </script> 
     
