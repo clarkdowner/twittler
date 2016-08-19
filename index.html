@@ -12,7 +12,7 @@
     
     <header>Clark's Twittler</header>
 
-    <button>Load Twittles</button>
+    <button class="bigButton">Load Twittles</button>
 
     <main class="tweet-container">tweet container</main>
   
@@ -20,44 +20,74 @@
 
     <script>
 
-      $(document).ready(function(){       
+// ORIGINAL FUNCTION 
+/*
+      $(document).ready(function(){
+          var $body = $('body');
+          $body.html('');
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<div></div>');
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+        }); */
+
+
+      $(document).ready(function(){
+        var count = streams.home.length - 1;
+
+        var tweetStream = function(user){
+          if (user === undefined){
+            var index = streams.home.length - 1;
+            var tweet = streams.home[index];
+          } else {
+            var index = streams.users[user].length - 1;
+            var tweet = streams.users[user][index];
+          }  
+
+          while(index >= 0) {           
+            var $tweet = $('<div class="single-tweet">' + '<button class="username"' + 'id="' + tweet.user + '">@' + tweet.user + '</button>: ' + tweet.message + '  ' + tweet.created_at + '</div>');
+            $tweet.appendTo('main');
+            index -= 1;
+          }
+        };
 
     //  Button click to load new tweets 
         $('.bigButton').on('click', function() {
-          $('main').html('');
+          
           $('.bigButton').text('Load New Twittles');
+
+          //tweetStream();
+
+          $('main').html('');
 
           var index = streams.home.length - 1;
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $('<div class="single-tweet">' + '<button class="username' + tweet.user + '">' +
-              '@' + tweet.user + '</button>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
+            var $tweet = $('<div class="single-tweet">' + '<button class="username"' + 'id="' + tweet.user + '">@' + tweet.user + '</button>: ' + tweet.message + '  ' + tweet.created_at + '</div>');
             $tweet.appendTo('main');
             index -= 1;
           }
-        }); 
 
-      /*  var index = streams.users.mracus.length - 1;
-          while(index >= 0){
-            var tweet = streams.users.mracus[index];
-            var $tweet = $('<div class="single-tweet">' + '<span class="username">' +
-              '@' + tweet.user + '</span>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
-            $tweet.appendTo($body);
-            index -= 1;
-          } 
-        }); */
+        }); 
 
     
     //  Cick to see only a user's tweets
        $('main').on('click', '.username', function() {
-          $('main').html('');
+          
           $(this).closest('.bigButton').text('Back to Home');
+
+          //tweetStream();
+
+          $('main').html('');
 
           var index = streams.users.mracus.length - 1;
           while(index >= 0){
             var tweet = streams.users.mracus[index];
-            var $tweet = $('<div class="single-tweet">' + '<span class="username">' +
-              '@' + tweet.user + '</span>' + ': ' + tweet.message + '  ' + tweet.created_at + '</div>');
+            var $tweet = $('<div class="single-tweet">' + '<button class="username"' + 'id="' + tweet.user + '">@' + tweet.user + '</button>: ' + tweet.message + '  ' + tweet.created_at + '</div>');
             $tweet.appendTo('main');
             index -= 1;
           } 
