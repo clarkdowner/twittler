@@ -12,28 +12,13 @@
         
     <header>Clark's Twittler</header>
 
-    <button class="bigButton">Load Twittles</button>
+    <button class="bigButton">Load New Tweets</button>
 
     <main class="tweet-container">tweet container</main>
   
     <footer>A HackReactor Project</footer>
 
     <script>
-
-// ORIGINAL FUNCTION 
-/*
-      $(document).ready(function(){
-          var $body = $('body');
-          $body.html('');
-          var index = streams.home.length - 1;
-          while(index >= 0){
-            var tweet = streams.home[index];
-            var $tweet = $('<div></div>');
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
-            $tweet.appendTo($body);
-            index -= 1;
-          }
-        }); */
 
       $(document).ready(function(){
 
@@ -63,7 +48,7 @@
     //  Button click to load all tweets 
         $('.bigButton').on('click', function() {
           
-          $('.bigButton').text('Load New Twittles');
+          $('.bigButton').text('Load New Tweets');
 
           tweetStream();
         }); 
@@ -71,13 +56,15 @@
     //  Button click to see a single user's tweets
        $('main').on('click', '.username', function() {
           
-          $(this).closest('.bigButton').text('Back to Home');
+          $('.bigButton').text('Load All Tweets');
 
           var user = $(this).attr('id');
           tweetStream(user);
         }); 
 
-      }); // << closes the document.ready function
+        tweetStream(); // call to load tweets upon initial page load
+
+      }); // closes the document.ready function
 
     </script> 
     
