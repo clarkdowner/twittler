@@ -120,7 +120,9 @@ main {
 
 .button-box {
   text-align: center;
-  margin: 12px auto 10px auto;
+  border-top: 3px solid gray;
+  padding: 12px 0 10px 0;
+
 }
 
 .tweet-container {
