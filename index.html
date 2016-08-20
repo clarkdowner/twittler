@@ -6,16 +6,22 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="timeago.js" type="text/javascript"></script>
   </head>
 
   <body>
         
     <header>Clark's Twittler</header>
 
-    <button class="bigButton">Load New Tweets</button>
+    <wrapper>
 
-    <main class="tweet-container">tweet container</main>
-  
+      <div class="button-box">      
+        <button class="loadButton">Load New Tweets</button>
+      </div>
+
+      <main class="tweet-container">tweet container</main>
+    </wrapper>
+ 
     <footer>A HackReactor Project</footer>
 
     <script>
@@ -39,16 +45,16 @@
              var tweet = streams.users[user][index];              
             }
 
-            var $tweet = $('<div class="single-tweet">' + '<button class="username"' + 'id="' + tweet.user + '">@' + tweet.user + '</button>: ' + tweet.message + '  ' + tweet.created_at + '</div>');
+            var $tweet = $('<div class="single-tweet">' + '<a class="username"' + 'id="' + tweet.user + '">@' + tweet.user + '</a>' + '<span class="tweet-message">'+ tweet.message + '</span>' + '<time class="timestamp timeago">' + tweet.created_at + '</time></div>');
             $tweet.appendTo('main');
             index -= 1;
           }
         };
 
     //  Button click to load all tweets 
-        $('.bigButton').on('click', function() {
+        $('.loadButton').on('click', function() {
           
-          $('.bigButton').text('Load New Tweets');
+          $('.loadButton').text('See New Tweets');
 
           tweetStream();
         }); 
@@ -56,11 +62,15 @@
     //  Button click to see a single user's tweets
        $('main').on('click', '.username', function() {
           
-          $('.bigButton').text('Load All Tweets');
+          $('.loadButton').text('See All Tweets');
 
           var user = $(this).attr('id');
           tweetStream(user);
         }); 
+
+    //  Timeago function - yet to be fully implemented
+    //    $("time.timeago").timeago();
+
 
         tweetStream(); // call to load tweets upon initial page load
 
