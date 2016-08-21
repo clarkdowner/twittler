@@ -74,11 +74,12 @@ header {
 }
 
 footer {
+  width: 100%;
   color: white;
   background: black;
   font: 300 16px/22px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 15px 0 15px 0;
-  margin: 15px 0 0 0;
+  margin: 55px 0 0 0;
   text-align: center;
 }
 
@@ -98,7 +99,7 @@ Button
   letter-spacing: .5px;
   margin: 10px auto;
   width: 30%;
-  font-size: 18px
+  font-size: 18px;
 }
 
 /*
@@ -111,18 +112,15 @@ main {
   font: 300 16px/22px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0 auto;
   padding: 15px 25px;
-  border: 3px solid #ASA5AF;
   border-radius: 12px;
   background: #57BC90;
   background: linear-gradient(#77C9D4, #57BC90 25%, #1da294);
-  width: 800px
+  width: 800px;
 }
 
 .button-box {
   text-align: center;
-  border-top: 3px solid gray;
   padding: 12px 0 10px 0;
-
 }
 
 .tweet-container {
